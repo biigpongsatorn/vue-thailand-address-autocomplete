@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+    <VueThailandAddressAutocomplete/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import VueThailandAddressAutocomplete from './components/VueThailandAddressAutocomplete'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    VueThailandAddressAutocomplete
   }
 }
 </script>
