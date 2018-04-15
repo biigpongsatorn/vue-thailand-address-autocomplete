@@ -1,0 +1,15 @@
+demo/
+node_modules/
+src/
+static/
+.babelrc
+.editorconfig
+.gitignore
+bili.config.js
+index.html
+npm-debug.log
+webpack.config.js
+
+.eslintignore
+.eslintrc.js
+yarn.lock

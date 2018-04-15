@@ -1,6 +1,6 @@
-# vue-thailand-address-autocomplete
+# vue-thailand-address-autocomplete 🇹🇭
 
-> Vue autocomplete component for thailand address
+> Vue autocomplete component for Thailand address. 
 
 ## Build Setup
 
