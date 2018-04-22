@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <div class="label">แขวง/ตำบล</div>
     <input type="text" v-model="subDistrict" class="input">
     <div class="list-container" v-if="resultsFromSearchBySubDistrict.length">
       <div class="list" v-for="(item, index) in resultsFromSearchBySubDistrict" :key="index">
@@ -59,6 +60,16 @@ export default {
   float: left;
   width: 100%;
   position: relative;
+}
+
+.label {
+  float: left;
+  width: 100%;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-align: left;
+  color: #333333;
+  margin-bottom: 10px; 
 }
 
 .input {
