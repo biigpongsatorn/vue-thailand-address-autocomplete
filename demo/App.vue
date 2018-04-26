@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <h1>vue-thailand-address-autocomplete</h1>
-    <ThailandAutoComplete type="district"/>
+    input : {{ input }}
+    <ThailandAutoComplete v-model="input" type="district" @select="select"/>
   </div>
 </template>
 
@@ -11,9 +12,14 @@ import ThailandAutoComplete from '../src/vue-thailand-address-autocomplete'
 export default {
   name: 'app',
   data () {
-    return {}
+    return {
+      input: ''
+    }
   },
   methods: {
+    select (address) {
+      console.log(address)
+    }
   },
   components: {
     ThailandAutoComplete

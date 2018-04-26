@@ -1,9 +1,20 @@
 <template>
   <div class="container">
     <div class="label">แขวง/ตำบล</div>
-    <input type="text" v-model="subDistrict" class="input">
-    <div class="list-container" v-if="resultsFromSearchBySubDistrict.length">
-      <div class="list" v-for="(item, index) in resultsFromSearchBySubDistrict" :key="index">
+    <input type="text"
+    v-model="currentValue"
+    class="input"
+    @keydown.up="pressArrowUp()"
+    @keydown.down="pressArrowDown()"
+    @keydown.enter="pressEnter()">
+    <div class="list-container" v-if="resultsFromSearchBySubDistrict.length && isOpenListContainer">
+      <div class="list"
+      :class="{ 'list-on-focus': itemOnFocus === index }"
+      v-for="(item, index) in resultsFromSearchBySubDistrict"
+      :key="index"
+      @mouseover="itemOnFocus = index"
+      @mouseout="itemOnFocus = -1"
+      @click="clickSelectItem(item)">
         {{item.district}} » {{item.amphoe}} » {{item.province}} » {{item.zipcode}}
       </div>
     </div>
@@ -14,24 +25,25 @@
 import { searchAddressByDistrict, searchAddressByAmphoe, searchAddressByProvince, searchAddressByZipcode } from 'thai-address-database'
 
 export default {
-  name: 'vue-thailand-address-autocomplete',
+  name: 'VueThailandAddressAutocomplete',
   props: {
+    value: {
+      type: [String, Number]
+    },
     type: {
-      type: String,
-      required: true
+      type: String
     }
   },
   data () {
     return {
-      subDistrict: '',
-      district: '',
-      province: '',
-      zipcode: ''
+      currentValue: this.value,
+      itemOnFocus: 0,
+      isOpenListContainer: true
     }
   },
   computed: {
     resultsFromSearchBySubDistrict () {
-      return searchAddressByDistrict(this.subDistrict)
+      return searchAddressByDistrict(this.currentValue)
     },
     resultsFromSearchByDistrict () {
       return searchAddressByAmphoe(this.q)
@@ -41,6 +53,56 @@ export default {
     },
     resultsFromSearchByZipcode () {
       return searchAddressByZipcode(this.q)
+    }
+  },
+  watch: {
+    /**
+     * - Update v-model of user.
+     * - Set ให้ List Container แสดงเมื่อ currentValue มีการเปลี่ยนแปลง
+     * - Set itemOnFocus = first item.
+     */
+    currentValue () {
+      this.$emit('input', this.currentValue)
+      this.isOpenListContainer = true
+      this.itemOnFocus = 0
+    },
+    /**
+     * - When v-model is changed: set internal value.
+     */
+    value (value) {
+      this.currentValue = value
+    }
+  },
+  methods: {
+    pressArrowUp () {
+      if (this.itemOnFocus > 0) {
+        this.itemOnFocus = this.itemOnFocus - 1
+      } else {
+        this.itemOnFocus = this.resultsFromSearchBySubDistrict.length - 1
+      }
+    },
+    pressArrowDown () {
+      if (this.itemOnFocus < this.resultsFromSearchBySubDistrict.length - 1) {
+        this.itemOnFocus = this.itemOnFocus + 1
+      } else {
+        this.itemOnFocus = 0
+      }
+    },
+     /**
+     * - emit ค่าที่เลือกกลับไปยังฟังชั่นของ user
+     * - Set currentValue = ข้อมูลที่ user เลือกไว้
+     * - ซ่อน List Container
+     */
+    setSelectedValue (address) {
+      this.$emit('select', address)
+      this.currentValue = address.district
+      this.$nextTick(() => this.isOpenListContainer = false)
+    },
+    pressEnter () {
+      this.setSelectedValue(this.resultsFromSearchBySubDistrict[this.itemOnFocus])
+    },
+    clickSelectItem (address) {
+      this.setSelectedValue(address)
     }
   }
 }
@@ -94,12 +156,14 @@ export default {
   z-index: 999;
   width: 100%;
   position: absolute;
-  top: 50px;
+  top: 80px;
   left: 0;
   border-radius: 6px;
   box-shadow: 0 2px 4px 0 rgba(27, 18, 18, 0.1);
   background-color: #ffffff;
   border: solid 1px #d3d3d3;
+  border-top: 0;
+  overflow: hidden;
 }
 
 .list {
@@ -108,7 +172,7 @@ export default {
   padding: 10px;
   border-bottom: solid 2px #f1f1f1;
 }
-.list:hover {
+.list-on-focus {
   cursor: pointer;
   background-color: #0073ff;
   color: #fff;
