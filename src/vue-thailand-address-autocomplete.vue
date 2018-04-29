@@ -1,16 +1,16 @@
 <template>
   <div class="container">
-    <div class="label">แขวง/ตำบล</div>
+    <div class="label">{{ currentLabel }}</div>
     <input type="text"
     v-model="currentValue"
     class="input"
     @keydown.up="pressArrowUp()"
     @keydown.down="pressArrowDown()"
     @keydown.enter="pressEnter()">
-    <div class="list-container" v-if="resultsFromSearchBySubDistrict.length && isOpenListContainer">
+    <div class="list-container" v-if="resultsFromSearch.length && isOpenListContainer">
       <div class="list"
       :class="{ 'list-on-focus': itemOnFocus === index }"
-      v-for="(item, index) in resultsFromSearchBySubDistrict"
+      v-for="(item, index) in resultsFromSearch"
       :key="index"
       @mouseover="itemOnFocus = index"
       @mouseout="itemOnFocus = -1"
@@ -32,27 +32,42 @@ export default {
     },
     type: {
       type: String
+    },
+    label: {
+      type: String
     }
   },
   data () {
     return {
       currentValue: this.value,
+      currentLabel: this.updateLabel(),
       itemOnFocus: 0,
       isOpenListContainer: true
     }
   },
   computed: {
-    resultsFromSearchBySubDistrict () {
-      return searchAddressByDistrict(this.currentValue)
+    resultsFromSearch () {
+      if (this.type) {
+        if (this.type === 'district') return this.resultsFromSearchByDistrict
+        else if (this.type === 'amphoe') return this.resultsFromSearchByAmphoe
+        else if (this.type === 'province') return this.resultsFromSearchByProvince
+        else if (this.type === 'zipcode') return this.resultsFromSearchByZipcode
+      } else {
+        this._errorLog('type is undefined.')
+        return []
+      }
     },
     resultsFromSearchByDistrict () {
-      return searchAddressByAmphoe(this.q)
+      return searchAddressByDistrict(this.currentValue)
+    },
+    resultsFromSearchByAmphoe () {
+      return searchAddressByAmphoe(this.currentValue)
     },
     resultsFromSearchByProvince () {
-      return searchAddressByProvince(this.q)
+      return searchAddressByProvince(this.currentValue)
     },
     resultsFromSearchByZipcode () {
-      return searchAddressByZipcode(this.q)
+      return searchAddressByZipcode(this.currentValue)
     }
   },
   watch: {
@@ -78,15 +93,21 @@ export default {
       if (this.itemOnFocus > 0) {
         this.itemOnFocus = this.itemOnFocus - 1
       } else {
-        this.itemOnFocus = this.resultsFromSearchBySubDistrict.length - 1
+        this.itemOnFocus = this.resultsFromSearch.length - 1
       }
     },
     pressArrowDown () {
-      if (this.itemOnFocus < this.resultsFromSearchBySubDistrict.length - 1) {
+      if (this.itemOnFocus < this.resultsFromSearch.length - 1) {
         this.itemOnFocus = this.itemOnFocus + 1
       } else {
         this.itemOnFocus = 0
       }
+    },
+    pressEnter () {
+      this.setSelectedValue(this.resultsFromSearch[this.itemOnFocus])
+    },
+    clickSelectItem (address) {
+      this.setSelectedValue(address)
     },
      /**
      * - emit ค่าที่เลือกกลับไปยังฟังชั่นของ user
@@ -95,14 +116,25 @@ export default {
      */
     setSelectedValue (address) {
       this.$emit('select', address)
-      this.currentValue = address.district
+      this.type ? this.currentValue = address[this.type] : this._errorLog('type is undefined.')
       this.$nextTick(() => this.isOpenListContainer = false)
     },
-    pressEnter () {
-      this.setSelectedValue(this.resultsFromSearchBySubDistrict[this.itemOnFocus])
+    updateLabel () {
+      if (this.label) return this.label
+      else return this.findDefaulLabel()
     },
-    clickSelectItem (address) {
-      this.setSelectedValue(address)
+    findDefaulLabel () {
+      if (this.type) {
+        if (this.type === 'district') return 'แขวง/ตำบล'
+        else if (this.type === 'amphoe') return 'เขต/อำเภอ'
+        else if (this.type === 'province') return 'จังหวัด'
+        else if (this.type === 'zipcode') return 'รหัสไปรษณีย์'
+      } else {
+        this._errorLog('type is undefined.')
+      }
+    },
+    _errorLog (text) {
+      console.error(`[ERROR] vue-thailand-address-autocomplete : ${text}`)
     }
   }
 }
