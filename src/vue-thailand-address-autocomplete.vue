@@ -3,13 +3,14 @@
     <div class="label" v-if="label">{{ label }}</div>
     <input type="text"
     v-model="currentValue"
+    :class="{ 'input-size-small': size === 'small', 'input-size-default': size === 'default', 'input-size-medium': size === 'medium', 'input-size-large': size === 'large' }"
     class="input"
     @keydown.up="pressArrowUp()"
     @keydown.down="pressArrowDown()"
     @keydown.enter="pressEnter()">
     <div class="list-container" v-if="resultsFromSearch.length && isOpenListContainer">
       <div class="list"
-      :style="{ 'backgroundColor': itemOnFocus === index ? currentColor : '#fff' }"
+      :style="{ 'background-color': itemOnFocus === index ? currentColor : '#fff', 'border-bottom-color': itemOnFocus === index ? currentColor : '#f1f1f1' }"
       :class="{ 'list-on-focus': itemOnFocus === index }"
       v-for="(item, index) in resultsFromSearch"
       :key="index"
@@ -39,6 +40,10 @@ export default {
     },
     color: {
       type: String
+    },
+    size: {
+      type: String,
+      default: 'default'
     }
   },
   data () {
@@ -150,6 +155,7 @@ export default {
   float: left;
   width: 100%;
   position: relative;
+  margin-bottom: .75rem;
 }
 
 .label {
@@ -159,17 +165,16 @@ export default {
   letter-spacing: normal;
   text-align: left;
   color: #333333;
-  margin-bottom: 10px; 
+  margin-bottom: .75rem;
 }
 
 .input {
   float: left;
   width: 100%;
-  height: 50px;
-  border-radius: 6px;
+  border-radius: 2px;
   background-color: #ffffff;
   border: solid 1px #d3d3d3;
-  padding-left: 10px;
+  padding-left: .75rem;
   line-height: 1.25;
   letter-spacing: normal;
   text-align: left;
@@ -180,13 +185,26 @@ export default {
   border: solid 1px #007ef9;
 }
 
+.input-size-small {
+  height: 27px;
+}
+.input-size-default {
+  height: 36px;
+}
+.input-size-medium {
+  height: 45px;
+}
+.input-size-large {
+  height: 54px;
+}
+
 .list-container {
   z-index: 999;
   width: 100%;
   position: absolute;
   top: 80px;
   left: 0;
-  border-radius: 6px;
+  border-radius: 2px;
   box-shadow: 0 2px 4px 0 rgba(27, 18, 18, 0.1);
   background-color: #ffffff;
   border: solid 1px #d3d3d3;
@@ -198,7 +216,7 @@ export default {
   float: left;
   width: 100%;
   padding: 10px;
-  border-bottom: solid 2px #f1f1f1;
+  border-bottom: solid 1px #f1f1f1;
 }
 .list-on-focus {
   cursor: pointer;
