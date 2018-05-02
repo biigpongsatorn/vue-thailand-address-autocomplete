@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>vue-thailand-address-autocomplete</h1>
-    <ThailandAutoComplete v-model="district" type="district" @select="select" label="ตำบล"/>
+    <ThailandAutoComplete v-model="district" type="district" @select="select" label="ตำบล" color="#f00"/>
     <ThailandAutoComplete v-model="amphoe" type="amphoe" @select="select" label="อำเภอ"/>
     <ThailandAutoComplete v-model="province" type="province" @select="select"/>
     <ThailandAutoComplete v-model="zipcode" type="zipcode" @select="select"/>

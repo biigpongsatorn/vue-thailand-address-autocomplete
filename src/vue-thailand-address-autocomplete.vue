@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="label">{{ currentLabel }}</div>
+    <div class="label" v-if="label">{{ label }}</div>
     <input type="text"
     v-model="currentValue"
     class="input"
@@ -9,13 +9,14 @@
     @keydown.enter="pressEnter()">
     <div class="list-container" v-if="resultsFromSearch.length && isOpenListContainer">
       <div class="list"
+      :style="{ 'backgroundColor': itemOnFocus === index ? currentColor : '#fff' }"
       :class="{ 'list-on-focus': itemOnFocus === index }"
       v-for="(item, index) in resultsFromSearch"
       :key="index"
       @mouseover="itemOnFocus = index"
       @mouseout="itemOnFocus = -1"
       @click="clickSelectItem(item)">
-        {{item.district}} » {{item.amphoe}} » {{item.province}} » {{item.zipcode}}
+        {{item.district}} > {{item.amphoe}} > {{item.province}} > {{item.zipcode}}
       </div>
     </div>
   </div>
@@ -35,12 +36,15 @@ export default {
     },
     label: {
       type: String
+    },
+    color: {
+      type: String
     }
   },
   data () {
     return {
       currentValue: this.value,
-      currentLabel: this.updateLabel(),
+      currentColor: this.color || '#0073ff',
       itemOnFocus: 0,
       isOpenListContainer: true
     }
@@ -86,6 +90,12 @@ export default {
      */
     value (value) {
       this.currentValue = value
+    },
+    /**
+     * - When color is changed: set internal value.
+     */
+    color (val) {
+      this.currentColor = val
     }
   },
   methods: {
@@ -118,20 +128,6 @@ export default {
       this.$emit('select', address)
       this.type ? this.currentValue = address[this.type] : this._errorLog('type is undefined.')
       this.$nextTick(() => this.isOpenListContainer = false)
-    },
-    updateLabel () {
-      if (this.label) return this.label
-      else return this.findDefaulLabel()
-    },
-    findDefaulLabel () {
-      if (this.type) {
-        if (this.type === 'district') return 'แขวง/ตำบล'
-        else if (this.type === 'amphoe') return 'เขต/อำเภอ'
-        else if (this.type === 'province') return 'จังหวัด'
-        else if (this.type === 'zipcode') return 'รหัสไปรษณีย์'
-      } else {
-        this._errorLog('type is undefined.')
-      }
     },
     _errorLog (text) {
       console.error(`[ERROR] vue-thailand-address-autocomplete : ${text}`)
@@ -206,7 +202,6 @@ export default {
 }
 .list-on-focus {
   cursor: pointer;
-  background-color: #0073ff;
   color: #fff;
 }
 </style>
