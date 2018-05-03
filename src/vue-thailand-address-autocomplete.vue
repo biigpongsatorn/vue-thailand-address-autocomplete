@@ -204,6 +204,7 @@ export default {
 .input:focus{
   outline: none;
   border: solid 1px #007ef9;
+  border-radius: 2px;
 }
 
 .input-size-small {
@@ -228,12 +229,12 @@ export default {
   width: 100%;
   position: absolute;
   left: 0;
-  border-radius: 2px;
-  box-shadow: 0 2px 4px 0 rgba(27, 18, 18, 0.1);
-  background-color: #ffffff;
-  border: solid 1px #d3d3d3;
   border-top: 0;
-  overflow: hidden;
+  max-height: 300px;
+  overflow: auto;
+  background-color: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px hsla(0,0%,4%,.1), 0 0 0 1px hsla(0,0%,4%,.1);
 }
 
 .list {
