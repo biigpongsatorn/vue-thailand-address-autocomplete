@@ -27,15 +27,21 @@
         <div class="list"
         :class="{ 'list-on-focus': itemOnFocus === index }"
         :style="{
-          'background-color': itemOnFocus === index ? currentColor : '#fff',
-          'border-bottom-color': itemOnFocus === index ? currentColor : '#f1f1f1'
+          'background-color': itemOnFocus === index ? currentColor : '#fff'
         }"
         v-for="(item, index) in resultsFromSearch"
         :key="index"
         @mouseover="itemOnFocus = index"
         @mouseout="itemOnFocus = -1"
         @click="clickSelectItem(item)">
-          {{item.district}} > {{item.amphoe}} > {{item.province}} > {{item.zipcode}}
+          <div>
+            <span>{{item.district}}</span>
+            <span>{{item.amphoe}}</span>
+            <span>{{item.province}}</span>
+          </div>
+          <div>
+            <span>{{item.zipcode}}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -194,70 +200,60 @@ export default {
 <style scoped>
 * {
   box-sizing: border-box;
-  font-family: 'Thonburi';
+  font-family: 'Thonburi', Arial;
   font-size: 16px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
 }
-
 .container {
   float: left;
   width: 100%;
   margin-bottom: .75rem;
 }
-
 .input-container {
   float: left;
   width: 100%;
   position: relative;
 }
-
 .label {
   float: left;
   width: 100%;
   line-height: 1.25;
   letter-spacing: normal;
   text-align: left;
-  color: #333333;
+  color: #363636;
   margin-bottom: .75rem;
 }
-
 .input {
   float: left;
   width: 100%;
-  border-radius: 2px;
+  border-radius: 3px;
   background-color: #ffffff;
   padding: calc(.475em - 1px) .75rem;
   line-height: 1.25;
   letter-spacing: normal;
   text-align: left;
-  color: #333333;
+  color: #363636;
   border: solid 1px #d3d3d3;
   box-shadow: inset 0 1px 2px hsla(0,0%,4%,.1);
 }
 .input:focus{
   outline: none;
-  border-radius: 2px;
+  border-radius: 3px;
 }
-
 .input-size-small {
-  /* height: 27px; */
   font-size: .75rem;
 }
 .input-size-default {
-  /* height: 36px; */
   font-size: 1rem;
 }
 .input-size-medium {
-  /* height: 45px; */
   font-size: 1.25rem;
 }
 .input-size-large {
-  /* height: 54px; */
   font-size: 1.5rem;
 }
-
 .list-container {
   z-index: 999;
   width: 100%;
@@ -271,7 +267,6 @@ export default {
   border-radius: 3px;
   box-shadow: 0 2px 3px hsla(0,0%,4%,.1), 0 0 0 1px hsla(0,0%,4%,.1);
 }
-
 .list {
   float: left;
   width: 100%;
