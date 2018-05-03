@@ -5,9 +5,19 @@
       <input type="text"
       v-model="currentValue"
       :placeholder="placeholder"
-      :class="{ 'input-size-small': size === 'small', 'input-size-default': size === 'default', 'input-size-medium': size === 'medium', 'input-size-large': size === 'large' }"
+      :class="{
+        'input-size-small': size === 'small',
+        'input-size-default': size === 'default',
+        'input-size-medium': size === 'medium',
+        'input-size-large': size === 'large'
+      }"
+      :style="{
+        'border': hasFocus ? 'solid 1px ' + currentColor : 'solid 1px #d3d3d3'
+      }"
       ref="input"
       class="input"
+      @focus="hasFocus = true"
+      @blur="hasFocus = false"
       @keydown.up="pressArrow('up')"
       @keydown.down="pressArrow('down')"
       @keydown.enter="pressEnter()">
@@ -15,8 +25,11 @@
       class="list-container"
       :style="{'top': findListContainerPosition() }">
         <div class="list"
-        :style="{ 'background-color': itemOnFocus === index ? currentColor : '#fff', 'border-bottom-color': itemOnFocus === index ? currentColor : '#f1f1f1' }"
         :class="{ 'list-on-focus': itemOnFocus === index }"
+        :style="{
+          'background-color': itemOnFocus === index ? currentColor : '#fff',
+          'border-bottom-color': itemOnFocus === index ? currentColor : '#f1f1f1'
+        }"
         v-for="(item, index) in resultsFromSearch"
         :key="index"
         @mouseover="itemOnFocus = index"
@@ -60,7 +73,8 @@ export default {
       currentValue: this.value,
       currentColor: this.color || '#0073ff',
       itemOnFocus: 0,
-      isOpenListContainer: true
+      isOpenListContainer: true,
+      hasFocus: false
     }
   },
   computed: {
@@ -214,17 +228,16 @@ export default {
   width: 100%;
   border-radius: 2px;
   background-color: #ffffff;
-  border: solid 1px #d3d3d3;
   padding: calc(.475em - 1px) .75rem;
   line-height: 1.25;
   letter-spacing: normal;
   text-align: left;
   color: #333333;
+  border: solid 1px #d3d3d3;
   box-shadow: inset 0 1px 2px hsla(0,0%,4%,.1);
 }
 .input:focus{
   outline: none;
-  /* border: solid 1px #007ef9; */
   border-radius: 2px;
 }
 
