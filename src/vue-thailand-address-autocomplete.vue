@@ -4,10 +4,12 @@
     <div class="input-container">
       <input type="text"
       v-model="currentValue"
+      :placeholder="placeholder"
       :class="{ 'input-size-small': size === 'small', 'input-size-default': size === 'default', 'input-size-medium': size === 'medium', 'input-size-large': size === 'large' }"
+      ref="input"
       class="input"
-      @keydown.up="pressArrowUp()"
-      @keydown.down="pressArrowDown()"
+      @keydown.up="pressArrow('up')"
+      @keydown.down="pressArrow('down')"
       @keydown.enter="pressEnter()">
       <div v-if="resultsFromSearch.length && isOpenListContainer"
       class="list-container"
@@ -40,6 +42,9 @@ export default {
       type: String
     },
     label: {
+      type: String
+    },
+    placeholder: {
       type: String
     },
     color: {
@@ -108,15 +113,26 @@ export default {
     }
   },
   methods: {
-    pressArrowUp () {
-      this.itemOnFocus > 0 ? this.itemOnFocus = this.itemOnFocus - 1 : this.itemOnFocus = 0
+    /**
+    * Arrows keys listener.
+    */
+    pressArrow (direction) {
+      if (direction === 'up') {
+        this.setInputCursorToLastChar()
+        this.itemOnFocus = this.itemOnFocus > 0 ? this.itemOnFocus - 1 : 0
+      } else {
+        this.itemOnFocus = this.itemOnFocus < this.resultsFromSearch.length - 1 ? this.itemOnFocus + 1 : this.resultsFromSearch.length - 1
+      }
     },
-    pressArrowDown () {
-      this.itemOnFocus < this.resultsFromSearch.length - 1 ? this.itemOnFocus = this.itemOnFocus + 1 : this.itemOnFocus = this.resultsFromSearch.length - 1
-    },
+    /**
+    * Enter button listener.
+    */
     pressEnter () {
       this.setSelectedValue(this.resultsFromSearch[this.itemOnFocus])
     },
+    /**
+    * Event on click item.
+    */
     clickSelectItem (address) {
       this.setSelectedValue(address)
     },
@@ -130,6 +146,9 @@ export default {
       this.type ? this.currentValue = address[this.type] : this._errorLog('type is undefined.')
       this.$nextTick(() => this.isOpenListContainer = false)
     },
+     /**
+     * - หาค่า top ของ Dropwon Container
+     */ 
     findListContainerPosition () {
       let top = '36px'
       if (this.size === 'small') {
@@ -141,6 +160,16 @@ export default {
       }
       return top
     },
+    /**
+     * - ทำให้ Cursor ของ input อยู่หลังสุดเสมอ
+     */ 
+    setInputCursorToLastChar () {
+      const len = this.currentValue.length * 2
+      setTimeout(() => { this.$refs.input.setSelectionRange(len, len) }, 1)
+    },
+    /**
+     * - Error Log
+     */ 
     _errorLog (text) {
       console.error(`[ERROR] vue-thailand-address-autocomplete : ${text}`)
     }
@@ -195,7 +224,7 @@ export default {
 }
 .input:focus{
   outline: none;
-  border: solid 1px #007ef9;
+  /* border: solid 1px #007ef9; */
   border-radius: 2px;
 }
 
@@ -221,10 +250,11 @@ export default {
   width: 100%;
   position: absolute;
   left: 0;
-  border-top: 0;
+  padding-top: 4px;
   max-height: 300px;
   overflow: auto;
   background-color: #ffffff;
+  border-top: solid 1px #f1f1f1;
   border-radius: 3px;
   box-shadow: 0 2px 3px hsla(0,0%,4%,.1), 0 0 0 1px hsla(0,0%,4%,.1);
 }
@@ -233,7 +263,6 @@ export default {
   float: left;
   width: 100%;
   padding: 10px;
-  border-bottom: solid 1px #f1f1f1;
 }
 .list-on-focus {
   cursor: pointer;
