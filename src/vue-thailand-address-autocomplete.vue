@@ -1,23 +1,27 @@
 <template>
   <div class="container">
     <div class="label" v-if="label">{{ label }}</div>
-    <input type="text"
-    v-model="currentValue"
-    :class="{ 'input-size-small': size === 'small', 'input-size-default': size === 'default', 'input-size-medium': size === 'medium', 'input-size-large': size === 'large' }"
-    class="input"
-    @keydown.up="pressArrowUp()"
-    @keydown.down="pressArrowDown()"
-    @keydown.enter="pressEnter()">
-    <div class="list-container" v-if="resultsFromSearch.length && isOpenListContainer">
-      <div class="list"
-      :style="{ 'background-color': itemOnFocus === index ? currentColor : '#fff', 'border-bottom-color': itemOnFocus === index ? currentColor : '#f1f1f1' }"
-      :class="{ 'list-on-focus': itemOnFocus === index }"
-      v-for="(item, index) in resultsFromSearch"
-      :key="index"
-      @mouseover="itemOnFocus = index"
-      @mouseout="itemOnFocus = -1"
-      @click="clickSelectItem(item)">
-        {{item.district}} > {{item.amphoe}} > {{item.province}} > {{item.zipcode}}
+    <div class="input-container">
+      <input type="text"
+      v-model="currentValue"
+      :class="{ 'input-size-small': size === 'small', 'input-size-default': size === 'default', 'input-size-medium': size === 'medium', 'input-size-large': size === 'large' }"
+      class="input"
+      @keydown.up="pressArrowUp()"
+      @keydown.down="pressArrowDown()"
+      @keydown.enter="pressEnter()">
+      <div v-if="resultsFromSearch.length && isOpenListContainer"
+      class="list-container"
+      :style="{'top': findListContainerPosition() }">
+        <div class="list"
+        :style="{ 'background-color': itemOnFocus === index ? currentColor : '#fff', 'border-bottom-color': itemOnFocus === index ? currentColor : '#f1f1f1' }"
+        :class="{ 'list-on-focus': itemOnFocus === index }"
+        v-for="(item, index) in resultsFromSearch"
+        :key="index"
+        @mouseover="itemOnFocus = index"
+        @mouseout="itemOnFocus = -1"
+        @click="clickSelectItem(item)">
+          {{item.district}} > {{item.amphoe}} > {{item.province}} > {{item.zipcode}}
+        </div>
       </div>
     </div>
   </div>
@@ -134,6 +138,17 @@ export default {
       this.type ? this.currentValue = address[this.type] : this._errorLog('type is undefined.')
       this.$nextTick(() => this.isOpenListContainer = false)
     },
+    findListContainerPosition () {
+      let top = '36px'
+      if (this.size === 'small') {
+        top = '27px'
+      } else if (this.size === 'medium') {
+        top = '45px'
+      } else if (this.size === 'large') {
+        top = '54px'
+      }
+      return top
+    },
     _errorLog (text) {
       console.error(`[ERROR] vue-thailand-address-autocomplete : ${text}`)
     }
@@ -154,8 +169,13 @@ export default {
 .container {
   float: left;
   width: 100%;
-  position: relative;
   margin-bottom: .75rem;
+}
+
+.input-container {
+  float: left;
+  width: 100%;
+  position: relative;
 }
 
 .label {
@@ -174,11 +194,12 @@ export default {
   border-radius: 2px;
   background-color: #ffffff;
   border: solid 1px #d3d3d3;
-  padding-left: .75rem;
+  padding: calc(.475em - 1px) .75rem;
   line-height: 1.25;
   letter-spacing: normal;
   text-align: left;
   color: #333333;
+  box-shadow: inset 0 1px 2px hsla(0,0%,4%,.1);
 }
 .input:focus{
   outline: none;
@@ -186,23 +207,26 @@ export default {
 }
 
 .input-size-small {
-  height: 27px;
+  /* height: 27px; */
+  font-size: .75rem;
 }
 .input-size-default {
-  height: 36px;
+  /* height: 36px; */
+  font-size: 1rem;
 }
 .input-size-medium {
-  height: 45px;
+  /* height: 45px; */
+  font-size: 1.25rem;
 }
 .input-size-large {
-  height: 54px;
+  /* height: 54px; */
+  font-size: 1.5rem;
 }
 
 .list-container {
   z-index: 999;
   width: 100%;
   position: absolute;
-  top: 80px;
   left: 0;
   border-radius: 2px;
   box-shadow: 0 2px 4px 0 rgba(27, 18, 18, 0.1);
