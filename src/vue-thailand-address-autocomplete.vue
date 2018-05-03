@@ -109,18 +109,10 @@ export default {
   },
   methods: {
     pressArrowUp () {
-      if (this.itemOnFocus > 0) {
-        this.itemOnFocus = this.itemOnFocus - 1
-      } else {
-        this.itemOnFocus = this.resultsFromSearch.length - 1
-      }
+      this.itemOnFocus > 0 ? this.itemOnFocus = this.itemOnFocus - 1 : this.itemOnFocus = 0
     },
     pressArrowDown () {
-      if (this.itemOnFocus < this.resultsFromSearch.length - 1) {
-        this.itemOnFocus = this.itemOnFocus + 1
-      } else {
-        this.itemOnFocus = 0
-      }
+      this.itemOnFocus < this.resultsFromSearch.length - 1 ? this.itemOnFocus = this.itemOnFocus + 1 : this.itemOnFocus = this.resultsFromSearch.length - 1
     },
     pressEnter () {
       this.setSelectedValue(this.resultsFromSearch[this.itemOnFocus])

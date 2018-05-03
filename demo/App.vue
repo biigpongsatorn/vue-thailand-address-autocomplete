@@ -3,7 +3,7 @@
     <h1>vue-thailand-address-autocomplete</h1>
     <ThailandAutoComplete v-model="district" type="district" @select="select" label="ตำบล" color="#f00" size="small"/>
     <ThailandAutoComplete v-model="amphoe" type="amphoe" @select="select" label="อำเภอ"/>
-    <ThailandAutoComplete v-model="province" type="province" @select="select" lavel="จังหวัด" size="medium"/>
+    <ThailandAutoComplete v-model="province" type="province" @select="select" label="จังหวัด" size="medium"/>
     <ThailandAutoComplete v-model="zipcode" type="zipcode" @select="select" size="large"/> 
   </div>
 </template>
