@@ -25,7 +25,7 @@
       class="list-container"
       :style="{'top': findListContainerPosition() }">
         <div class="list"
-        :class="{ 'list-on-focus': itemOnFocus === index }"
+        :class="{ 'list-on-focused': itemOnFocus === index }"
         :style="{
           'background-color': itemOnFocus === index ? currentColor : '#fff'
         }"
@@ -34,13 +34,21 @@
         @mouseover="itemOnFocus = index"
         @mouseout="itemOnFocus = -1"
         @click="clickSelectItem(item)">
-          <div>
-            <span>{{item.district}}</span>
-            <span>{{item.amphoe}}</span>
-            <span>{{item.province}}</span>
+          <div class="box-item-top" :class="{ 'box-item-top-focused': itemOnFocus === index }">
+            <span class="item-first">
+              {{item.district}}
+            </span>
+            <span class="item-second">
+              {{item.zipcode}}
+            </span>
+            <span class="item-third">
+              {{item.province}}
+            </span>
           </div>
-          <div>
-            <span>{{item.zipcode}}</span>
+          <div class="box-item-bottom">
+            <span class="item-first font-weight-bold">
+              {{item.amphoe}}
+            </span>
           </div>
         </div>
       </div>
@@ -201,7 +209,6 @@ export default {
 * {
   box-sizing: border-box;
   font-family: 'Thonburi', Arial;
-  font-size: 16px;
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
@@ -270,10 +277,38 @@ export default {
 .list {
   float: left;
   width: 100%;
-  padding: 10px;
+  padding: 12px;
 }
-.list-on-focus {
+.list-on-focused {
   cursor: pointer;
   color: #fff;
+}
+.box-item-top {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 16px;
+  float: left;
+  width: 100%;
+  line-height: 14px;
+}
+.box-item-top-focused {
+  color: rgba(255, 255, 255, 0.7);
+}
+.box-item-bottom {
+  float: left;
+  width: 100%;
+  margin-top: 5px;
+}
+.item-first {
+  float: left;
+}
+.item-second {
+  float: right;
+}
+.item-third {
+  float: right;
+  margin-right: 15px;
+}
+.font-weight-bold {
+  font-weight: bold;
 }
 </style>
