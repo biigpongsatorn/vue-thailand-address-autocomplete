@@ -10,8 +10,8 @@
       size="small"
       placeholder="ตำบล..."/>
     <ThailandAutoComplete v-model="amphoe" type="amphoe" @select="select" label="อำเภอ" placeholder="อำเภอ..."/>
-    <ThailandAutoComplete v-model="province" type="province" @select="select" label="จังหวัด" size="medium" color="green"/>
-    <ThailandAutoComplete v-model="zipcode" type="zipcode" @select="select" size="large" color="black"/> 
+    <ThailandAutoComplete v-model="province" type="province" @select="select" label="จังหวัด" size="medium" color="green" placeholder="จังหวัด..."/>
+    <ThailandAutoComplete v-model="zipcode" type="zipcode" @select="select" size="large" color="black" placeholder="รหัสไปรษณีย์..."/> 
   </div>
 </template>
 
@@ -47,7 +47,7 @@ h1 {
   font-family: Arial, Helvetica, sans-serif;
 }
 #app {
-  width: 600px;
+  width: 50vw;
   margin: 0 auto;
 }
 .card {
