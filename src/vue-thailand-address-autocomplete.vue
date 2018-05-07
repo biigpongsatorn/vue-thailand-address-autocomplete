@@ -12,7 +12,7 @@
         'input-size-large': size === 'large'
       }"
       :style="{
-        'border': hasFocus ? 'solid 1px ' + currentColor : 'solid 1px #d3d3d3'
+        'border': hasFocus && currentColor !== '#f5f5f5' ? 'solid 1px ' + currentColor : 'solid 1px #d3d3d3'
       }"
       ref="input"
       class="input"
@@ -27,27 +27,30 @@
         <div class="list"
         :class="{ 'list-on-focused': itemOnFocus === index }"
         :style="{
-          'background-color': itemOnFocus === index ? currentColor : '#fff'
+          'background-color': itemOnFocus === index ? currentColor : '#fff',
+          'color': itemOnFocus === index && currentColor !== '#f5f5f5' ? '#fff' : '#000'
         }"
         v-for="(item, index) in resultsFromSearch"
         :key="index"
         @mouseover="itemOnFocus = index"
         @mouseout="itemOnFocus = -1"
         @click="clickSelectItem(item)">
-          <div class="box-item-top" :class="{ 'box-item-top-focused': itemOnFocus === index }">
+          <div class="box-item-top" :class="{ 'box-item-top-focused': itemOnFocus === index && currentColor !== '#f5f5f5' }">
             <span class="item-first">
-              {{item.district}}
+              {{ itemFirst(item) }}
             </span>
-            <span class="item-second">
-              {{item.zipcode}}
-            </span>
-            <span class="item-third">
-              {{item.province}}
-            </span>
+            <div class="float-right">
+              <span class="item-second">
+                {{ itemSecond(item) }}
+              </span>
+              <span class="item-third">
+                {{ itemThird(item) }}
+              </span>
+            </div>
           </div>
           <div class="box-item-bottom">
             <span class="item-first font-weight-bold">
-              {{item.amphoe}}
+              {{ itemFourth(item) }}
             </span>
           </div>
         </div>
@@ -85,7 +88,7 @@ export default {
   data () {
     return {
       currentValue: this.value,
-      currentColor: this.color || '#0073ff',
+      currentColor: this.color || '#f5f5f5',
       itemOnFocus: 0,
       isOpenListContainer: true,
       hasFocus: false
@@ -196,6 +199,30 @@ export default {
       setTimeout(() => { this.$refs.input.setSelectionRange(len, len) }, 1)
     },
     /**
+     * - แสดงข้อมูลซ้ายบน
+     */ 
+    itemFirst (address) {
+      return this.type === 'district' ? address['amphoe'] : address['district']
+    },
+    /**
+     * - แสดงข้อมูลตรงกลางบน
+     */ 
+    itemSecond (address) {
+      return this.type === 'amphoe' || this.type === 'district' ? address['province'] : address['amphoe']
+    },
+    /**
+     * - แสดงข้อมูลขวาบน
+     */ 
+    itemThird (address) {
+      return this.type === 'province' || this.type === 'amphoe' || this.type === 'district' ? address['zipcode'] : address['province']
+    },
+    /**
+     * - แสดงข้อมูลล่างซ้าย
+     */ 
+    itemFourth (address) {
+      return address[this.type]
+    },
+    /**
      * - Error Log
      */ 
     _errorLog (text) {
@@ -281,7 +308,6 @@ export default {
 }
 .list-on-focused {
   cursor: pointer;
-  color: #fff;
 }
 .box-item-top {
   color: rgba(0, 0, 0, 0.7);
@@ -291,7 +317,7 @@ export default {
   line-height: 14px;
 }
 .box-item-top-focused {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.9);
 }
 .box-item-bottom {
   float: left;
@@ -302,11 +328,14 @@ export default {
   float: left;
 }
 .item-second {
-  float: right;
+  float: left;
+  margin-right: 15px;
 }
 .item-third {
+  float: left;
+}
+.float-right {
   float: right;
-  margin-right: 15px;
 }
 .font-weight-bold {
   font-weight: bold;
