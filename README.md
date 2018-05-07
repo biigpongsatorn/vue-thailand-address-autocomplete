@@ -1,6 +1,6 @@
 # vue-thailand-address-autocomplete 🇹🇭
 
-> Thailand address autocomplete read to use component.
+> Ready to use Thailand address autocomplete component.
 
 # Run demo in local.
 
