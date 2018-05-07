@@ -22,6 +22,7 @@
       @keydown.down="pressArrow('down')"
       @keydown.enter="pressEnter()">
       <div v-if="resultsFromSearch.length && isOpenListContainer"
+      ref="dropdown"
       class="list-container"
       :style="{'top': findListContainerPosition() }">
         <div class="list"
@@ -154,12 +155,32 @@ export default {
       } else {
         this.itemOnFocus = this.itemOnFocus < this.resultsFromSearch.length - 1 ? this.itemOnFocus + 1 : this.resultsFromSearch.length - 1
       }
+      this.moveScrollOfListContainer()
     },
     /**
     * Enter button listener.
     */
     pressEnter () {
       this.setSelectedValue(this.resultsFromSearch[this.itemOnFocus])
+    },
+    /**
+    * เลื่อน scroll bar ตาม Item ที่เลือก
+    */
+    moveScrollOfListContainer () {
+      const list = this.$refs.dropdown
+      const element = list.querySelectorAll('.list')[this.itemOnFocus]
+      if (!element) return
+      const visMin = list.scrollTop
+      const visMax = list.scrollTop + list.clientHeight - element.clientHeight
+      if (element.offsetTop < visMin) {
+        list.scrollTop = element.offsetTop
+      } else if (element.offsetTop >= visMax) {
+        list.scrollTop = (
+          element.offsetTop -
+          list.clientHeight +
+          element.clientHeight
+        )
+      }
     },
     /**
     * Event on click item.
