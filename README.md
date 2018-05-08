@@ -46,14 +46,7 @@ export default {
 ```html
 <template>
   <div>
-   <ThailandAutoComplete
-      v-model="district"
-      type="district"
-      @select="select"
-      label="ตำบล"
-      color="#42b883"
-      size="default"
-      placeholder="ตำบล..."/>
+   <ThailandAutoComplete v-model="district" type="district" @select="select" label="ตำบล/แขวง" color="#42b883" size="default" placeholder="ตำบล/แขวง"/>
   </div>
 </template>
 ```
