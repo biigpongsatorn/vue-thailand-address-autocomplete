@@ -58,6 +58,15 @@ export default {
 </template>
 ```
 
+# Options
+
+## Props
+
+> coming soon...
+
+## Events
+
+> coming soon...
 
 # ทดลอง Run Demo.
 
