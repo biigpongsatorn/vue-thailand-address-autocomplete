@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-click-outside="onClickOutside">
     <div class="label" v-if="label">{{ label }}</div>
     <div class="input-container">
       <input type="text"
@@ -62,6 +62,7 @@
 
 <script>
 import { searchAddressByDistrict, searchAddressByAmphoe, searchAddressByProvince, searchAddressByZipcode } from 'thai-address-database'
+import vClickOutside from 'v-click-outside'
 
 export default {
   name: 'VueThailandAddressAutocomplete',
@@ -94,6 +95,9 @@ export default {
       isOpenListContainer: true,
       hasFocus: false
     }
+  },
+  directives: {
+    clickOutside: vClickOutside.directive
   },
   computed: {
     resultsFromSearch () {
@@ -145,6 +149,9 @@ export default {
     }
   },
   methods: {
+    onClickOutside (event) {
+      this.isOpenListContainer = false
+    },
     /**
     * Arrows keys listener.
     */

@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "thai-address-database": "0.0.25",
+    "v-click-outside": "^1.0.4",
     "vue": "^2.5.11"
   },
   "browserslist": [
