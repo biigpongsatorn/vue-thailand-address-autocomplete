@@ -130,16 +130,21 @@ export default {
      * - Set ให้ List Container แสดงเมื่อ currentValue มีการเปลี่ยนแปลง
      * - Set itemOnFocus = first item.
      */
-    currentValue () {
+    currentValue (value) {
       this.$emit('input', this.currentValue)
       this.isOpenListContainer = true
       this.itemOnFocus = 0
     },
     /**
-     * - When v-model is changed: set internal value.
+     * - ถ้า v-model เปลี่ยนค่าจากนอก Component
+     * - ให้เปลี่ยนค่า Internal value ด้วย 
+     * - และซ่อน Dropdown
      */
     value (value) {
-      this.currentValue = value
+      if (value !== this.currentValue) {
+        this.currentValue = value
+        this.$nextTick(() => this.isOpenListContainer = false)
+      }
     },
     /**
      * - When color is changed: set internal value.
