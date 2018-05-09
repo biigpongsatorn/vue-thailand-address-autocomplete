@@ -91,11 +91,11 @@ export default {
 | Props       | Type          | Default   | Description                                                             |
 | ----------- |:--------------| ----------|-------------------------------------------------------------------------|
 | v-model     | String        | -         | Binding value                                                           |
-| type        | String        | -         | ประเภทของ Field ประกอบด้วย `'district', 'amphoe', 'province', 'zipcode'` |
+| type        | String        | -         | ประเภทของ Field ประกอบด้วย `district`, `amphoe`, `province`, `zipcode`   |
 | label       | String        | -         | คำอธิบายของ Field                                                        |
 | placeholder | String        | -         | placeholder ของ Field                                                   |
 | color       | String        | -         | สี border ของ Field ตอน Focus และสี background ของ List                   |
-| size        | String        |`'default'`| ขนาดของ Field ประกอบด้วย `'small', 'default', 'medium', 'large'`         |
+| size        | String        |`default`  | ขนาดของ Field ประกอบด้วย `small`, `default`, `medium`, `large`           |
 
 ## Events
 
