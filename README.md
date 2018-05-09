@@ -6,7 +6,7 @@
 
 # Vue Thailand Address Autocomplete 🇹🇭
 
-ออโต้คอมพลีทที่อยู่ในประเทศไทยแบบสำเร็จรูป.
+<span style="font-size: 21px;">Auto complete ที่อยู่ในประเทศไทยแบบสำเร็จรูป</span>
 
 # ตัวอย่าง
 
@@ -46,9 +46,37 @@ export default {
 ```html
 <template>
   <div>
-   <ThailandAutoComplete v-model="district" type="district" @select="select" label="ตำบล/แขวง" color="#42b883" size="default" placeholder="ตำบล/แขวง"/>
+    <ThailandAutoComplete
+      v-model="district"
+      type="district"
+      @select="select"
+      label="ตำบล"
+      color="#42b883"
+      size="default"
+      placeholder="ตำบล..."/>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      district: '',
+      amphoe: '',
+      province: '',
+      zipcode: ''
+    }
+  },
+  methods: {
+    select (address) {
+      this.district = address.district
+      this.amphoe = address.amphoe
+      this.province = address.province
+      this.zipcode = address.zipcode
+    }
+  }
+}
+</script>
 ```
 
 # Options
