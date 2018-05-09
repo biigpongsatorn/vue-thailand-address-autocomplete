@@ -88,19 +88,20 @@ export default {
 # Options
 
 ## Props
-| Props       | Type          | Default  | Description  |
-| ----------- |:--------------| ---------|--------------|
-| value       | String        | -        | Binding value|
-| type        | String        | -        | ประเภทของ Field ประกอบด้วย "district", "amphoe", "province", "zipcode"|
-| label       | String        | -        | คำอธิบายของ Field|
-| placeholder       | String        | -        | placeholder ของ Field|
-| color       | String        | -        | สี ของ Field|
-
-> coming soon...
+| Props       | Type          | Default   | Description                                                             |
+| ----------- |:--------------| ----------|-------------------------------------------------------------------------|
+| v-model     | String        | -         | Binding value                                                           |
+| type        | String        | -         | ประเภทของ Field ประกอบด้วย `'district', 'amphoe', 'province', 'zipcode'` |
+| label       | String        | -         | คำอธิบายของ Field                                                        |
+| placeholder | String        | -         | placeholder ของ Field                                                   |
+| color       | String        | -         | สี border ของ Field ตอน Focus และสี background ของ List                   |
+| size        | String        |`'default'`| ขนาดของ Field ประกอบด้วย `'small', 'default', 'medium', 'large'`         |
 
 ## Events
 
-> coming soon...
+| Props       | Type          | Default         | Description                                                                                      |
+| ----------- |:--------------| ----------------|--------------------------------------------------------------------------------------------------|
+| select      | Function      | (address) => {} | Return address data (type object) when select address, คืนค่า Object ที่อยู่เมื่อเลือกที่อยู่จาก Autocomplete |
 
 # ทดลอง Run Demo.
 
