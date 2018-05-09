@@ -54,6 +54,12 @@ export default {
       color="#42b883"
       size="default"
       placeholder="ตำบล..."/>
+
+    <ThailandAutoComplete v-model="amphoe" type="amphoe" @select="select" label="อำเภอ"/>
+
+    <ThailandAutoComplete v-model="province" type="province" @select="select" label="จังหวัด"/>
+
+    <ThailandAutoComplete v-model="zipcode" type="zipcode" @select="select" label="รหัสไปรษณีย์"/> 
   </div>
 </template>
 
@@ -82,6 +88,13 @@ export default {
 # Options
 
 ## Props
+| Props       | Type          | Default  | Description  |
+| ----------- |:--------------| ---------|--------------|
+| value       | String        | -        | Binding value|
+| type        | String        | -        | ประเภทของ Field ประกอบด้วย "district", "amphoe", "province", "zipcode"|
+| label       | String        | -        | คำอธิบายของ Field|
+| placeholder       | String        | -        | placeholder ของ Field|
+| color       | String        | -        | สี ของ Field|
 
 > coming soon...
 
