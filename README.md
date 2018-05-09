@@ -125,4 +125,5 @@ npm run build
 
 [MIT](LICENSE)
 
-Developed with ❤️ and ☕️
+Developed with ❤️ and ☕️  
+Maintained by [@biigpongsatorn](https://github.com/biigpongsatorn)
