@@ -99,9 +99,9 @@ export default {
 
 ## Events
 
-| Props       | Type          | Default         | Description                                                                                      |
-| ----------- |:--------------| ----------------|--------------------------------------------------------------------------------------------------|
-| select      | Function      | (address) => {} | Return address data (type object) when select address, คืนค่า Object ที่อยู่เมื่อเลือกที่อยู่จาก Autocomplete |
+| Props       | Type          | Default           | Description                                                                                      |
+| ----------- |:--------------| ------------------|--------------------------------------------------------------------------------------------------|
+| select      | Function      | `(address) => {}` | Return address data (type object) when select address, คืนค่า Object ที่อยู่เมื่อเลือกที่อยู่จาก Autocomplete |
 
 # ทดลอง Run Demo.
 
