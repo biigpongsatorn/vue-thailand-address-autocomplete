@@ -10,7 +10,7 @@ Auto complete ที่อยู่ในประเทศไทยแบบส
 
 # ตัวอย่าง
 
-> coming soon...
+[Demo Site](https://vue-thailand-address-autocomplete.netlify.com)
 
 # ติดตั้ง
 
@@ -58,7 +58,7 @@ export default {
     <ThailandAutoComplete v-model="amphoe" type="amphoe" @select="select" label="อำเภอ" placeholder="อำเภอ..."/>
 
     <ThailandAutoComplete v-model="province" type="province" @select="select" label="จังหวัด" size="medium" color="#35495e" placeholder="จังหวัด..."/>
-    
+
     <ThailandAutoComplete v-model="zipcode" type="zipcode" @select="select" size="large" color="#00a4e4" placeholder="รหัสไปรษณีย์..."/> 
   </div>
 </template>
