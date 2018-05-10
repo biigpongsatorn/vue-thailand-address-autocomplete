@@ -6,7 +6,7 @@
 
 # Vue Thailand Address Autocomplete 🇹🇭
 
-<span style="font-size: 21px;">Auto complete ที่อยู่ในประเทศไทยแบบสำเร็จรูป</span>
+Auto complete ที่อยู่ในประเทศไทยแบบสำเร็จรูป, Base on [thai-address-database](https://github.com/Sellsuki/thai-address-database)
 
 # ตัวอย่าง
 
