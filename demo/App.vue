@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <h1>vue-thailand-address-autocomplete</h1>
+    <a href="https://github.com/biigpongsatorn/vue-thailand-address-autocomplete">
+      <h1>vue-thailand-address-autocomplete</h1>
+    </a>
     <ThailandAutoComplete
       v-model="district"
       type="district"
@@ -60,5 +62,12 @@ h1 {
   border: 1px solid #ccc;
   text-align: center;
   margin-bottom: 25px;
+}
+
+@media only screen and (max-width: 768px) {
+  #app {
+    width: 80vw;
+    margin: 0 auto;
+  }
 }
 </style>
