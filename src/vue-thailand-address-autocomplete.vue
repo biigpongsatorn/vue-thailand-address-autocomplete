@@ -28,29 +28,28 @@
         <div class="list"
         :class="{ 'list-on-focused': itemOnFocus === index }"
         :style="{
-          'background-color': itemOnFocus === index ? currentColor : '#fff',
-          'color': itemOnFocus === index && currentColor !== '#f5f5f5' ? '#fff' : '#000'
+          'background-color': itemOnFocus === index ? currentColor : '#fff'
         }"
         v-for="(item, index) in resultsFromSearch"
         :key="index"
         @mouseover="itemOnFocus = index"
         @mouseout="itemOnFocus = -1"
         @click="clickSelectItem(item)">
-          <div class="box-item-top" :class="{ 'box-item-top-focused': itemOnFocus === index && currentColor !== '#f5f5f5' }">
-            <span class="item-first">
+          <div class="box-item-top">
+            <span class="item-first" :class="{ 'box-item-top-focused': itemOnFocus === index && currentColor !== '#f5f5f5' }">
               {{ itemFirst(item) }}
             </span>
             <div class="float-right">
-              <span class="item-second">
+              <span class="item-second" :class="{ 'box-item-top-focused': itemOnFocus === index && currentColor !== '#f5f5f5' }">
                 {{ itemSecond(item) }}
               </span>
-              <span class="item-third">
+              <span class="item-third" :class="{ 'box-item-top-focused': itemOnFocus === index && currentColor !== '#f5f5f5' }">
                 {{ itemThird(item) }}
               </span>
             </div>
           </div>
           <div class="box-item-bottom">
-            <span class="item-first font-weight-bold">
+            <span class="item-first font-weight-bold" :style="{'color': itemOnFocus === index && currentColor !== '#f5f5f5' ? '#fff' : '#000'}">
               {{ itemFourth(item) }}
             </span>
           </div>

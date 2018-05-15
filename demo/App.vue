@@ -18,6 +18,7 @@
 </template>
 
 <script>
+// import ThailandAutoComplete from '../dist/vue-thailand-address-autocomplete.min.js'
 import ThailandAutoComplete from '../src/vue-thailand-address-autocomplete'
 
 export default {
