@@ -117,7 +117,7 @@ export default {
 # Support
 
 ```
-If you feel like this project, You can support me with starring ⭐ this project.
+If you like this project, You can support me with starring ⭐ this project.
 ```
 
 # License
