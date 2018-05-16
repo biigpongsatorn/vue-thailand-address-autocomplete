@@ -12,7 +12,7 @@ Auto complete ที่อยู่ในประเทศไทยแบบส
 
 # ตัวอย่าง
 
-[Demo Site](https://vue-thailand-address-autocomplete.netlify.com)
+[Official Demo Site](https://biigpongsatorn.github.io/#/vue-thailand-address-autocompleter)
 
 # ติดตั้ง
 
@@ -105,27 +105,42 @@ export default {
 | ----------- |:--------------| ------------------|--------------------------------------------------------------------------------------------------|
 | select      | Function      | (address) => {}   | Return address data (type object) when select address, คืนค่า Object ที่อยู่เมื่อเลือกที่อยู่จาก Autocomplete |
 
-# ทดลอง Run Demo.
+# Contributing
 
 ``` sh
-# clone this repository
-git clone https://github.com/biigpongsatorn/vue-thailand-address-autocomplete.git
+// 1. Fork this repository.
 
-# cd to repository
-cd vue-thailand-address-autocomplete
+// 2. Create featuer branch.
 
-# install dependencies
+git checkout -b feature-name
+
+// 3. Install dependencies.
+
 npm install
 
-# serve with hot reload at localhost:8080
+// 4. Run in local
+
 npm run dev
 
-# build for production with minification
-npm run build
+// 5. Commit as feature name
+
+git commit -m "Feature name"
+
+// 6. Push to your fork repository.
+
+git push origin feature-name
+
+// 7. Create pull request.
 ```
+
+# Support
+
+```
+If you feel like this project, You can support me in a small way with starring ⭐ this project.
+```
+
 # License
 
 [MIT](LICENSE)
 
-Developed with ❤️ and ☕️  
-Maintained by [@biigpongsatorn](https://github.com/biigpongsatorn)
+Developed with ❤️ and ☕️ 
