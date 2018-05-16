@@ -10,11 +10,11 @@
 
 Auto complete ที่อยู่ในประเทศไทยแบบสำเร็จรูป, Base on [thai-address-database](https://github.com/Sellsuki/thai-address-database)
 
-# ตัวอย่าง
+# Demo Page
 
-[Official Demo Site](https://biigpongsatorn.github.io/#/vue-thailand-address-autocompleter)
+[>>> Demo Page <<<](https://biigpongsatorn.github.io/#/vue-thailand-address-autocompleter)
 
-# ติดตั้ง
+# Install
 
 ```sh
 npm install vue-thailand-address-autocomplete --save
@@ -24,7 +24,7 @@ npm install vue-thailand-address-autocomplete --save
 yarn add vue-thailand-address-autocomplete
 ```
 
-# การใช้งาน
+# Usage
 
 ```javascript
 import ThailandAutoComplete from 'vue-thailand-address-autocomplete'
@@ -42,7 +42,7 @@ export default {
 }
 ```
 
-# การนำไปใช้
+# Example
 <img src="https://raw.githubusercontent.com/biigpongsatorn/vue-thailand-address-autocomplete/HEAD/static/example/ex1.png"/>
 
 ```html
@@ -106,37 +106,18 @@ export default {
 | select      | Function      | (address) => {}   | Return address data (type object) when select address, คืนค่า Object ที่อยู่เมื่อเลือกที่อยู่จาก Autocomplete |
 
 # Contributing
-
-``` javascript
-// 1. Fork this repository.
-
-// 2. Create featuer branch.
-
-git checkout -b feature-name
-
-// 3. Install dependencies.
-
-npm install
-
-// 4. Run in local
-
-npm run dev
-
-// 5. Commit as feature name
-
-git commit -m "Feature name"
-
-// 6. Push to your fork repository.
-
-git push origin feature-name
-
-// 7. Create pull request.
-```
+1. Fork this repository.
+2. Create new branch with feature name.
+3. Run `npm install` and `npm run dev`.
+4. Create your feature.
+5. Commit and set commit message with feature name.
+6. Push your code to your fork repository.
+7. Create pull request. 🙂
 
 # Support
 
 ```
-If you feel like this project, You can support me in a small way with starring ⭐ this project.
+If you feel like this project, You can support me with starring ⭐ this project.
 ```
 
 # License
