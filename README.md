@@ -107,7 +107,7 @@ export default {
 
 # Contributing
 
-``` sh
+``` javascript
 // 1. Fork this repository.
 
 // 2. Create featuer branch.

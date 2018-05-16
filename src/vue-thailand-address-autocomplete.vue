@@ -305,7 +305,7 @@ export default {
   box-shadow: inset 0 1px 2px hsla(0,0%,4%,.1);
 }
 .input:focus{
-  outline: none;
+  outline: none !important;
   border-radius: 3px;
 }
 .input-size-small {
