@@ -12,7 +12,7 @@ Auto complete ที่อยู่ในประเทศไทยแบบส
 
 # Demo Page
 
-[>>> Demo Page <<<](https://biigpongsatorn.github.io/#/vue-thailand-address-autocompleter)
+[Documentation & Demo Page](https://biigpongsatorn.github.io/#/vue-thailand-address-autocompleter)
 
 # Install
 
