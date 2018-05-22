@@ -13,7 +13,7 @@ Auto complete ที่อยู่ในประเทศไทยแบบส
 Base on
 [jquery.Thailand.js](https://github.com/earthchie/jquery.Thailand.js) and [thai-address-database](https://github.com/Sellsuki/thai-address-database)
 
-Fantastic database by [@earthchie](https://github.com/earthchie)
+Very well database by [@earthchie](https://github.com/earthchie)
 
 # Demo Page
 
