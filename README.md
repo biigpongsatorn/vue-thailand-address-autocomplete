@@ -8,7 +8,10 @@
 
 # Vue Thailand Address Autocomplete 🇹🇭
 
-Auto complete ที่อยู่ในประเทศไทยแบบสำเร็จรูป, Base on [thai-address-database](https://github.com/Sellsuki/thai-address-database)
+Auto complete ที่อยู่ในประเทศไทยแบบสำเร็จรูป
+
+Base on
+[jquery.Thailand.js](https://github.com/earthchie/jquery.Thailand.js) และ [thai-address-database](https://github.com/Sellsuki/thai-address-database)
 
 # Demo Page
 
