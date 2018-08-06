@@ -91,7 +91,7 @@ export default {
       currentValue: this.value,
       currentColor: this.color || '#f5f5f5',
       itemOnFocus: 0,
-      isOpenListContainer: true,
+      isOpenListContainer: false,
       hasFocus: false
     }
   },
@@ -131,7 +131,9 @@ export default {
      */
     currentValue (value) {
       this.$emit('input', this.currentValue)
-      this.isOpenListContainer = true
+      if (this.hasFocus) {
+        this.isOpenListContainer = true
+      }
       this.itemOnFocus = 0
     },
     /**

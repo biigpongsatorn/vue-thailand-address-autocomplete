@@ -25,7 +25,7 @@ export default {
   name: 'app',
   data () {
     return {
-      district: '',
+      district: 'สิชล',
       amphoe: '',
       province: '',
       zipcode: ''
