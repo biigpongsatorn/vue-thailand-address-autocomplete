@@ -1,21 +1,22 @@
 <template>
-  <div class="container" v-click-outside="onClickOutside">
-    <div class="label" v-if="label">{{ label }}</div>
-    <div class="input-container">
+  <div class="vth-addr-container" v-click-outside="onClickOutside">
+    <div class="vth-addr-label" v-if="label">{{ label }}</div>
+    <div class="vth-addr-input-container">
       <input type="text"
       v-model="currentValue"
       :placeholder="placeholder"
       :class="{
-        'input-size-small': size === 'small',
-        'input-size-default': size === 'default',
-        'input-size-medium': size === 'medium',
-        'input-size-large': size === 'large'
+        'vth-addr-input-size-small': size === 'small',
+        'vth-addr-input-size-default': size === 'default',
+        'vth-addr-input-size-medium': size === 'medium',
+        'vth-addr-input-size-large': size === 'large'
       }"
       :style="{
         'border': hasFocus && currentColor !== '#f5f5f5' ? 'solid 1px ' + currentColor : 'solid 1px #d3d3d3'
       }"
+      autocomplete="disabled"
       ref="input"
-      class="input"
+      class="vth-addr-input"
       @focus="hasFocus = true"
       @blur="hasFocus = false"
       @keydown.up="pressArrow('up')"
@@ -23,10 +24,10 @@
       @keydown.enter="pressEnter()">
       <div v-if="resultsFromSearch.length && isOpenListContainer"
       ref="dropdown"
-      class="list-container"
+      class="lvth-addr-ist-container"
       :style="{'top': findListContainerPosition() }">
-        <div class="list"
-        :class="{ 'list-on-focused': itemOnFocus === index }"
+        <div class="vth-addr-list"
+        :class="{ 'vth-addr-list-on-focused': itemOnFocus === index }"
         :style="{
           'background-color': itemOnFocus === index ? currentColor : '#fff'
         }"
@@ -35,21 +36,21 @@
         @mouseover="itemOnFocus = index"
         @mouseout="itemOnFocus = -1"
         @click="clickSelectItem(item)">
-          <div class="box-item-top">
-            <span class="item-first" :class="{ 'box-item-top-focused': itemOnFocus === index && currentColor !== '#f5f5f5' }">
+          <div class="vth-addr-box-item-top">
+            <span class="item-first" :class="{ 'vth-addr-box-item-top-focused': itemOnFocus === index && currentColor !== '#f5f5f5' }">
               {{ itemFirst(item) }}
             </span>
-            <div class="float-right">
-              <span class="item-second" :class="{ 'box-item-top-focused': itemOnFocus === index && currentColor !== '#f5f5f5' }">
+            <div class="vth-addr-float-right">
+              <span class="vth-addr-item-second" :class="{ 'vth-addr-box-item-top-focused': itemOnFocus === index && currentColor !== '#f5f5f5' }">
                 {{ itemSecond(item) }}
               </span>
-              <span class="item-third" :class="{ 'box-item-top-focused': itemOnFocus === index && currentColor !== '#f5f5f5' }">
+              <span class="vth-addr-item-third" :class="{ 'vth-addr-box-item-top-focused': itemOnFocus === index && currentColor !== '#f5f5f5' }">
                 {{ itemThird(item) }}
               </span>
             </div>
           </div>
-          <div class="box-item-bottom">
-            <span class="item-first font-weight-bold" :style="{'color': itemOnFocus === index && currentColor !== '#f5f5f5' ? '#fff' : '#000'}">
+          <div class="vth-addr-box-item-bottom">
+            <span class="vth-addr-item-first vth-addr-font-weight-bold" :style="{'color': itemOnFocus === index && currentColor !== '#f5f5f5' ? '#fff' : '#000'}">
               {{ itemFourth(item) }}
             </span>
           </div>
@@ -138,7 +139,7 @@ export default {
     },
     /**
      * - ถ้า v-model เปลี่ยนค่าจากนอก Component
-     * - ให้เปลี่ยนค่า Internal value ด้วย 
+     * - ให้เปลี่ยนค่า Internal value ด้วย
      * - และซ่อน Dropdown
      */
     value (value) {
@@ -213,7 +214,7 @@ export default {
     },
      /**
      * - หาค่า top ของ Dropwon Container
-     */ 
+     */
     findListContainerPosition () {
       let top = '36px'
       if (this.size === 'small') {
@@ -227,38 +228,38 @@ export default {
     },
     /**
      * - ทำให้ Cursor ของ input อยู่หลังสุดเสมอ
-     */ 
+     */
     setInputCursorToLastChar () {
       const len = this.currentValue.length * 2
       setTimeout(() => { this.$refs.input.setSelectionRange(len, len) }, 1)
     },
     /**
      * - แสดงข้อมูลซ้ายบน
-     */ 
+     */
     itemFirst (address) {
       return this.type === 'district' ? address['amphoe'] : address['district']
     },
     /**
      * - แสดงข้อมูลตรงกลางบน
-     */ 
+     */
     itemSecond (address) {
       return this.type === 'amphoe' || this.type === 'district' ? address['province'] : address['amphoe']
     },
     /**
      * - แสดงข้อมูลขวาบน
-     */ 
+     */
     itemThird (address) {
       return this.type === 'province' || this.type === 'amphoe' || this.type === 'district' ? address['zipcode'] : address['province']
     },
     /**
      * - แสดงข้อมูลล่างซ้าย
-     */ 
+     */
     itemFourth (address) {
       return address[this.type]
     },
     /**
      * - Error Log
-     */ 
+     */
     _errorLog (text) {
       console.error(`[ERROR] vue-thailand-address-autocomplete : ${text}`)
     }
@@ -274,17 +275,17 @@ export default {
   font-style: normal;
   font-stretch: normal;
 }
-.container {
+.vth-addr-container {
   float: left;
   width: 100%;
   margin-bottom: .75rem;
 }
-.input-container {
+.vth-addr-input-container {
   float: left;
   width: 100%;
   position: relative;
 }
-.label {
+.vth-addr-label {
   float: left;
   width: 100%;
   line-height: 1.25;
@@ -293,7 +294,7 @@ export default {
   color: #363636;
   margin-bottom: .75rem;
 }
-.input {
+.vth-addr-input {
   float: left;
   width: 100%;
   border-radius: 3px;
@@ -306,72 +307,59 @@ export default {
   border: solid 1px #d3d3d3;
   box-shadow: inset 0 1px 2px hsla(0,0%,4%,.1);
 }
-.input:focus{
+.vth-addr-input:focus {
   outline: none !important;
   border-radius: 3px;
 }
-.input-size-small {
+.vth-addr-input-size-small {
   font-size: .75rem;
 }
-.input-size-default {
+.vth-addr-input-size-default {
   font-size: 1rem;
 }
-.input-size-medium {
+.vth-addr-input-size-medium {
   font-size: 1.25rem;
 }
-.input-size-large {
+.vth-addr-input-size-large {
   font-size: 1.5rem;
 }
-.list-container {
-  z-index: 999;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  padding-top: 4px;
-  max-height: 300px;
-  overflow: auto;
-  background-color: #ffffff;
-  border-top: solid 1px #f1f1f1;
-  border-radius: 3px;
-  box-shadow: 0 2px 3px hsla(0,0%,4%,.1), 0 0 0 1px hsla(0,0%,4%,.1);
-}
-.list {
+.vth-addr-list {
   float: left;
   width: 100%;
   padding: 12px;
 }
-.list-on-focused {
+.vth-addr-list-on-focused {
   cursor: pointer;
 }
-.box-item-top {
+.vth-addr-box-item-top {
   color: rgba(0, 0, 0, 0.7);
   font-size: 16px;
   float: left;
   width: 100%;
   line-height: 14px;
 }
-.box-item-top-focused {
+.vth-addr-box-item-top-focused {
   color: rgba(255, 255, 255, 0.9);
 }
-.box-item-bottom {
+.vth-addr-box-item-bottom {
   float: left;
   width: 100%;
   margin-top: 5px;
 }
-.item-first {
+.vth-addr-item-first {
   float: left;
 }
-.item-second {
+.vth-addr-item-second {
   float: left;
   margin-right: 15px;
 }
-.item-third {
+.vth-addr-item-third {
   float: left;
 }
-.float-right {
+.vth-addr-float-right {
   float: right;
 }
-.font-weight-bold {
+.vth-addr-font-weight-bold {
   font-weight: bold;
 }
 </style>
