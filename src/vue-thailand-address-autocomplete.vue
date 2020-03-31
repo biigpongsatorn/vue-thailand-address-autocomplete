@@ -24,7 +24,7 @@
       @keydown.enter="pressEnter()">
       <div v-if="resultsFromSearch.length && isOpenListContainer"
       ref="dropdown"
-      class="lvth-addr-ist-container"
+      class="vth-addr-list-container"
       :style="{'top': findListContainerPosition() }">
         <div class="vth-addr-list"
         :class="{ 'vth-addr-list-on-focused': itemOnFocus === index }"
@@ -337,6 +337,19 @@ export default {
   float: left;
   width: 100%;
   line-height: 14px;
+}
+.vth-addr-list-container {
+  z-index: 999;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  padding-top: 4px;
+  max-height: 300px;
+  overflow: auto;
+  background-color: #ffffff;
+  border-top: solid 1px #f1f1f1;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px hsla(0,0%,4%,.1), 0 0 0 1px hsla(0,0%,4%,.1);
 }
 .vth-addr-box-item-top-focused {
   color: rgba(255, 255, 255, 0.9);
