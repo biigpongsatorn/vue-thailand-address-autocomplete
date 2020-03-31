@@ -1,7 +1,7 @@
 {
   "name": "vue-thailand-address-autocomplete",
   "description": "Vue autocomplete component for Thailand address. 🇹🇭",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "Pongsatorn Nitithammawoot <biig_pongsatorn@hotmail.com>",
   "license": "MIT",
   "main": "dist/vue-thailand-address-autocomplete.min.js",
@@ -18,7 +18,7 @@
     "url": "git+https://github.com/biigpongsatorn/vue-thailand-address-autocomplete.git"
   },
   "dependencies": {
-    "thai-address-database": "0.0.25",
+    "thai-address-database": "^0.0.27",
     "v-click-outside": "^1.0.4",
     "vue": "^2.5.11"
   },
@@ -32,6 +32,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-3": "^6.24.1",
+    "bili": "^3.4.2",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
     "file-loader": "^1.1.4",
